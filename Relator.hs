@@ -30,6 +30,8 @@ cast = []
 
 -- Simplify extract and map function
 
+elemExtract f l = elem True $ map f l
+
 hasRelation :: Name -> Relation -> Bool
 hasRelation n r = n == person r
 
@@ -37,12 +39,17 @@ matchesName :: Name -> Person -> Bool
 matchesName n1 (n2,_) = n1 == n2
 
 checkRelation :: Person -> Name -> Bool
-checkRelation (_,l) n = elem True $ map (hasRelation n) l 
+checkRelation (_,l) n = elemExtract (hasRelation n) l 
 
 addNewChar :: [Person] -> Name -> [Person]
 addNewChar [] n = (n,[]):[]
 addNewChar l n
-	   | elem True $ map (matchesName n) l
+	   | elemExtract (matchesName n) l = l
+	   | otherwise = (n,[]):l
+
+addExistChar :: [Person] -> Person -> [Person]
+addExistChar l (n,_)
+	     | elemExtract (matchesName n) l = 
 
 -- examples
 
