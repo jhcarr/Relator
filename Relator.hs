@@ -23,9 +23,14 @@ instance Show Relation where
 
 type Person	= (Name, [Relation])
 
-cast = [Person]
+cast = []
 
---addRelation :: person -> RStance -> Person -> Person 
+hasRelation :: Name -> Relation -> Bool
+hasRelation n r = n == person r
+
+checkRelation :: Person -> Name -> Bool
+checkRelation (_,l) n = elem True $ map (hasRelation n) l 
+
 
 -- examples
 
