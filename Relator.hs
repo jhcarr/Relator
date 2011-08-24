@@ -40,21 +40,15 @@ hasRelation (_,l) n = elem n $ map person l
 
 -- To Do: Typeclass the following 2 functions:
 
-class Castlist c where
-names 	 :: [c] -> [Name]
-addNew 	 :: [c] -> Name -> [c]
-addExist :: [c] -> Person -> [c]
-
-instance Castlist Person where
-names = fst.unzip
 addNew [] n = (n,[]):[]
 addNew l n
-	   | elem n $ names l = l
-	   | otherwise = (n,[]):l
+       | elem n $ fst (unzip l) = l
+       | otherwise = (n,[]):l
+
 addExist [] p = p:[]
---addExist l (n,r)
---	     | elem n $ names l = l
---	     | otherwise = (n,r):l
+addExist l (n,r)
+	 | elem n $ fst (unzip l) = l
+	 | otherwise = (n,r):l
 
 -- examples
 
