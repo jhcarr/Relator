@@ -28,34 +28,40 @@ type Person = (Name, [Relation])
 
 cast = []
 
--- Simplify extract and map function
+matchRelation :: Name -> Relation -> Bool
+matchRelation n r = n == person r
 
-elemExtract f l = elem True $ map f l
+matchName :: Name -> Person -> Bool
+matchName n1 (n2,_) = n1 == n2
 
-hasRelation :: Name -> Relation -> Bool
-hasRelation n r = n == person r
+hasRelation :: Person -> Name -> Bool
+hasRelation (_,l) n = elem n $ map person l
 
-matchesName :: Name -> Person -> Bool
-matchesName n1 (n2,_) = n1 == n2
 
-checkRelation :: Person -> Name -> Bool
-checkRelation (_,l) n = elemExtract (hasRelation n) l 
+-- To Do: Typeclass the following 2 functions:
 
-addNewChar :: [Person] -> Name -> [Person]
-addNewChar [] n = (n,[]):[]
-addNewChar l n
-	   | elemExtract (matchesName n) l = l
+class Castlist c where
+names 	 :: [c] -> [Name]
+addNew 	 :: [c] -> Name -> [c]
+addExist :: [c] -> Person -> [c]
+
+instance Castlist Person where
+names = fst.unzip
+addNew [] n = (n,[]):[]
+addNew l n
+	   | elem n $ names l = l
 	   | otherwise = (n,[]):l
-
-addExistChar :: [Person] -> Person -> [Person]
-addExistChar l (n,_)
-	     | elemExtract (matchesName n) l = 
+addExist [] p = p:[]
+--addExist l (n,r)
+--	     | elem n $ names l = l
+--	     | otherwise = (n,r):l
 
 -- examples
 
 x = "Joe"
 y = "Frank"
+z = "Mimi"
 rel1 = Relation {person = y, kind = Stranger, stance = Likes}
-list = [rel1]
+rel2 = Relation {person = z, kind = Acquainted, stance = Loves}
 
-p1 = (x, list)
+p1 = (x, [rel1, rel2])
