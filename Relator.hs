@@ -28,25 +28,23 @@ type Person = (Name, [Relation])
 
 cast = []
 
-matchRelation :: Name -> Relation -> Bool
-matchRelation n r = n == person r
-
-matchName :: Name -> Person -> Bool
-matchName n1 (n2,_) = n1 == n2
-
 hasRelation :: Person -> Name -> Bool
 hasRelation (_,l) n = elem n $ map person l
 
+updPerson :: Person -> Name -> RStance -> Person
+updPerson p@(_,[]) _ _ = p
+updPerson (n1,r) n2 s = [ if person x==n2 then upd x ]
 
--- To Do: Typeclass the following 2 functions:
+upd :: Relation -> RStance -> Relation 
+upd r s = Relation {person = person r, kind = kind r, stance = s} 
 
-addNew [] n = (n,[]):[]
-addNew l n
+insNew [] n = (n,[]):[]
+insNew l n
        | elem n $ fst (unzip l) = l
        | otherwise = (n,[]):l
 
-addExist [] p = p:[]
-addExist l (n,r)
+insExist [] p = p:[]
+insExist l (n,r)
 	 | elem n $ fst (unzip l) = l
 	 | otherwise = (n,r):l
 
