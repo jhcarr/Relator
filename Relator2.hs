@@ -24,6 +24,8 @@ data Person = Person {
 	      loves :: [Name]
      	      }
 
+class RChar r where
+name :: r -> Name
 
 cast = []
 
