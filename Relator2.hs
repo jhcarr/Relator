@@ -9,12 +9,6 @@ module Relator2 where
 
 type Name = String
 
-data RNature = Stranger | Acquainted | Related
-     deriving Show
-
-data RStance = Hates | Dislikes | Ambivalent | Likes | Loves
-     deriving Show
-
 data Person = Person {
      	      name :: Name
 	      hates :: [Name]
@@ -26,6 +20,22 @@ data Person = Person {
 
 class RChar r where
 name :: r -> Name
+
+-- Getters
+gHates :: r -> [Name]
+gDislikes :: r -> [Name]
+gAmbivs :: r -> [Name]
+gLikes :: r -> [Name]
+gLoves :: r -> [Name]
+
+-- Setters
+sHates :: r -> [Name] -> r
+sDislikes :: r -> [Name] -> r
+sAmbivs :: r -> [Name] -> r
+sLikes :: r -> [Name] -> r
+sLoves :: r -> [Name] -> r
+
+
 
 cast = []
 
