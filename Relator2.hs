@@ -10,31 +10,41 @@ module Relator2 where
 type Name = String
 
 data Person = Person {
-     	      name :: Name
-	      hates :: [Name]
-	      dislikes :: [Name]
-	      ambivalent :: [Name]
-	      likes :: [Name]
+     	      name :: Name,
+	      hates :: [Name],
+	      dislikes :: [Name],
+	      ambivalent :: [Name],
+	      likes :: [Name],
 	      loves :: [Name]
      	      }
 
 class RChar r where
-name :: r -> Name
+charName    :: r -> Name
 
 -- Getters
-gHates :: r -> [Name]
-gDislikes :: r -> [Name]
-gAmbivs :: r -> [Name]
-gLikes :: r -> [Name]
-gLoves :: r -> [Name]
+gHates		:: r -> [Name]
+gDislikes 	:: r -> [Name]
+gAmbivs 	:: r -> [Name]
+gLikes 		:: r -> [Name]
+gLoves 		:: r -> [Name]
 
 -- Setters
-sHates :: r -> [Name] -> r
-sDislikes :: r -> [Name] -> r
-sAmbivs :: r -> [Name] -> r
-sLikes :: r -> [Name] -> r
-sLoves :: r -> [Name] -> r
+sHates		:: r -> Name -> r
+--sDislikes 	:: r -> Name -> r
+--sAmbivs 	:: r -> Name -> r
+--sLikes 		:: r -> Name -> r
+--sLoves 		:: r -> Name -> r
 
+instance RChar Person where
+charName = name
+
+gHates 	   = hates
+gDislikes  = dislikes
+gAmbivs    = ambivalent
+gLikes 	   = likes
+gLoves 	   = loves
+
+sHates     =
 
 
 cast = []
@@ -46,6 +56,6 @@ y = "Frank"
 z = "Mimi"
 
 p1 = Person {
-     name = x
+     name = x,
      likes = [y,z]
      }
