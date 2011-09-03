@@ -36,3 +36,10 @@ debug = True
 
 
 -- examples
+
+x = Relation {
+    person1 = "Joe",
+    person2 = "Mimi",
+    kind = Stranger,
+    stance = Ambivalent
+    }
