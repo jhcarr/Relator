@@ -5,16 +5,22 @@
 module Environment where
 
 import Relator3
+import List
 
-cast = []
 rels = []
 
-addCast :: [Name] -> Name -> [Name]
-addCast l n
-	| elem n l	= l
-	| otherwise 	= n:l
-
-addRel :: [Relation] -> Relation -> [Relation]
-addRel l r
+addRel :: Relation -> [Relation] -> [Relation]
+addRel r l
        | elem r l	= l
        | otherwise	= r:l
+
+getCast :: [Relation] -> [Name]
+getCast l = nub (map person1 l ++ map person2 l)
+
+-- Function ideas:
+
+publicStatus :: Name -> [Relation] -> [RStance]
+publicStatus n l = map stance $ filter (\r -> n == person2 r ) l
+
+suitors :: Name -> [Relation] -> [Name]
+suitors n l = map person1 $ filter (\r -> ((n == person2 r) && (stance r == Love))) l
