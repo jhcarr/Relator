@@ -37,3 +37,15 @@ x = Relation {
     kind = Stranger,
     stance = Ambivalent
     }
+y = Relation {
+    person1 = "Mimi",
+    person2 = "Joe",
+    kind = Stranger,
+    stance = Ambivalent
+    }
+z = Relation {
+    person1 = "Bill",
+    person2 = "Mimi",
+    kind = Acquaintance,
+    stance = Love
+    }
