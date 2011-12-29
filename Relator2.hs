@@ -1,5 +1,9 @@
--- Justin Carr
--- Wed, Aug 25, 2011
+--Relator Environment Module
+--Justin Carr
+--9/7/2011
+--
+--These Haskell modules have been created for Justin's own amusement and as a possible reference for anyone interested in learning some basic Haskell.
+--Justin Carr does not accept any responsibility for any damage of any kind caused by use of these modules.
 
 module Relator2 where
 

@@ -1,6 +1,9 @@
 --Relator Environment Module
 --Justin Carr
 --9/7/2011
+--
+--These Haskell modules have been created for Justin's own amusement and as a possible reference for anyone interested in learning some basic Haskell.
+--Justin Carr does not accept any responsibility for any damage of any kind caused by use of these modules.
 
 module Environment where
 
@@ -20,7 +23,7 @@ getCast l = nub (map person1 l ++ map person2 l)
 matchPerson i n r
 	    | i == 1 = n == person1 r
 	    | i == 2 = n == person2 r
-	    | otherwise = undefined
+--	    | otherwise = undefined
 
 matchStance s r = s == stance r
 
