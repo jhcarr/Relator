@@ -9,6 +9,9 @@ module Environment where
 
 import Relator3
 import List
+import IO 
+
+help = "opinions, publicStatus, suitors"       
 
 addRel :: Relation -> [Relation] -> [Relation]
 addRel r l
