@@ -8,6 +8,9 @@
 module RuleSet1 where
 
 import Environment
+import Monad
 
 -- General form for the rule set:
--- [target persons] [relations] [changes] 
+-- [target persons] [relations] [changes]
+
+stepGraph rule list = fmap rule list
