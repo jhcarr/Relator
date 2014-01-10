@@ -7,11 +7,11 @@
 
 module Environment where
 
-import Relator3
-import List
-import IO 
+import Relator
+import Data.List
+--import System.IO 
 
-help = "opinions, publicStatus, suitors"       
+help = "getCast, opinions, publicStatus, suitors"       
 
 addRel :: Relation -> [Relation] -> [Relation]
 addRel r l
@@ -19,27 +19,26 @@ addRel r l
        | otherwise	= r:l
 
 getCast :: [Relation] -> [Name]
-getCast l = nub (map person1 l ++ map person2 l)
+getCast l = nub (map actor l ++ map intended l)
 
 -- Function ideas:
 
-matchPerson i n r
-	    | i == 1 = n == person1 r
-	    | i == 2 = n == person2 r
---	    | otherwise = undefined
+matchActor a r = a == actor r
+
+matchIntended i r = i == intended r
 
 matchStance s r = s == stance r
 
 matchKind k r = k == kind r
 
 opinions :: Name -> [Relation] -> [Relation]
-opinions n = filter (matchPerson 1 n)
+opinions n = filter (matchActor n)
 
 publicStatus :: Name -> [Relation] -> [RStance]
-publicStatus n l = map stance $ filter (matchPerson 2 n) l
+publicStatus n l = map stance $ filter (matchIntended n) l
 
 suitors :: Name -> [Relation] -> [Name]
-suitors n l = map person1 $ filter (\r -> (matchPerson 2 n r && matchStance Love r)) l
+suitors n l = map actor $ filter (\r -> (matchIntended n r && matchStance Love r)) l
 
 -- Examples
 -- (x,y, and z are defined in Relator3)
