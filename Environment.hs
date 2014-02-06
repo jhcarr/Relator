@@ -18,6 +18,11 @@ addRel r l
        | elem r l	= l
        | otherwise	= r:l
 
+writeOut r [] = []
+writeOut r (l:ls)
+         | r == l = ls
+         | otherwise = l:( writeOut r ls )
+
 getCast :: [Relation] -> [Name]
 getCast l = nub (map actor l ++ map intended l)
 
