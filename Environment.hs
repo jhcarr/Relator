@@ -18,15 +18,15 @@ addRel r l
        | elem r l	= l
        | otherwise	= r:l
 
-writeOut r [] = []
-writeOut r (l:ls)
-         | r == l = ls
-         | otherwise = l:( writeOut r ls )
+removeRel r [] = []
+removerel r (l:ls)s
+          | r == l = ls
+          | otherwise = l:( removeRel r ls )
 
 getCast :: [Relation] -> [Name]
 getCast l = nub (map actor l ++ map intended l)
 
--- Function ideas:
+-- Sample Function ideas:
 
 matchActor a r = a == actor r
 

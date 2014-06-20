@@ -8,9 +8,21 @@
 module RuleSet1 where
 
 import Environment
-import Monad
+import Relator
+--import Monad
 
 -- General form for the rule set:
 -- [target persons] [relations] [changes]
 
-stepGraph rule list = fmap rule list
+-- stepGraph rule list = map rule list
+
+makeFriend :: Relation -> Relation -> Relation
+makeFriend r1 r2 = Relation (actor r1) (actor r2) Acquaintance Like
+
+makeFoe :: Relation -> Relation -> Relation
+makeFoe r1 r2 = Relation (actor r1) (actor r2) Acquaintance Hate
+
+describe n1 n2 = filter (\r -> (matchActor n1 r) && (matchIntended n2 r))
+
+killCharacter c [] = []
+killCharacter c (a:as) = if matchActor c a then (killCharacter c as) else a:(killCharacter c as)
